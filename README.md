@@ -15,3 +15,6 @@
 ## 💻 ტექნოლოგიები
 * HTML5
 * CSS3 (Flexbox, Grid)
+
+#Live Link
+https://natalish01.github.io/box-model-assigment/
