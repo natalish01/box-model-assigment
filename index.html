@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Box Model</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+  <!-- ნაწილი 1: -->
+  <header class="hero">
+    <h1 class="hero__title">CSS Box Model — როგორ ითვლის ბრაუზერი ზომებს?</h1>
+    <p class="hero__lead">
+    Box Model არის CSS-ის ფუნდამენტი. მისი სწორი გაგება გეხმარებათ აირიდოთ გაფუჭებული განლაგება (Broken Layout) და ზუსტად
+    აკონტროლოთ ელემენტების ზომები.
+    </p>
+  </header>
+ 
+  <main>
+    <!-- ნაწილი 2: 4 შრე -->
+    <section class="section box-model-demo">
+      <h2>Box Model-ის 4 შრე</h2>
+      <div class="box-model-demo__grid">
+        <div class="layer layer--margin">
+          <span class="layer__name">margin</span>
+          <div class="layer layer--border">
+            <span class="layer__name">border</span>
+            <div class="layer layer--padding">
+              <span class="layer__name">padding</span>
+              <div class="layer layer--content">content</div>
+            </div>
+          </div>
+        </div>
+ 
+        <dl class="layer-list">
+          <div class="layer-list__item layer-list__item--content">
+            <dt>Content</dt>
+            <dd>შიგთავსი: ტექსტი, სურათი ან სხვა HTML ელემენტები.</dd>
+          </div>
+          <div class="layer-list__item layer-list__item--padding">
+            <dt>Padding</dt>
+            <dd>შიდა სივრცე კონტენტსა და ჩარჩოს (Border) შორის. იღებს ელემენტის ფონს (background).</dd>
+          </div>
+          <div class="layer-list__item layer-list__item--border">
+            <dt>Border</dt>
+            <dd>საზღვარი, რომელიც გარს ერტყმის Padding-ს. აქვს სისქე, სტილი და ფერი.</dd>
+          </div>
+          <div class="layer-list__item layer-list__item--margin">
+            <dt>Margin</dt>
+            <dd>გარე გამჭვირვალე სივრცე, რომელიც ამ ელემენტს აშორებს მეზობელი ელემენტებისგან.</dd>
+          </div>
+        </dl>
+ 
+      </div>
+    </section>
+ 
+    <!-- ნაწილი 3: დუელი -->
+    <section class="section">
+      <h2>დიდი დუელი: Content-Box vs Border-Box</h2>
+      <p class="section-intro">
+        ორივე ბარათს ერთნაირი CSS აქვს: <span>width: 300px; padding: 20px; 
+border: 5px solid</span>.
+        ერთადერთი განსხვავება <span>box-sizing</span>-ია.
+      </p>
+ 
+      <div class="duel">
+ 
+        <article class="duel__side">
+          <div class="card card--content-box">
+            <h3>ბარათი A</h3>
+            <p><span>box-sizing: content-box</span> (ბრაუზერის დეფოლტი)</p>
+            <p>
+              <span>width: 300px</span> ეხება მხოლოდ კონტენტს. padding და border ზემოდან ემატება,
+              ამიტომ რეალური სიგანე ეკრანზე <strong>350px</strong> გახდა:
+              300 + 20×2 + 5×2.
+            </p>
+            <p class="formula">საბოლოო ზომა = Width + Padding + Border</p>
+          </div>
+        </article>
+ 
+        <article class="duel__side">
+          <div class="card card--border-box">
+            <h3>ბარათი B</h3>
+            <p><span>box-sizing: border-box</span></p>
+            <p>
+              <span>width: 300px</span> მოიცავს კონტენტს, padding-სა და border-ს ერთად.
+              ისინი მითითებული სიგანის შიგნით „ჩაიფუთა“ და ბარათი ზუსტად
+              <strong>300px</strong> დარჩა.
+            </p>
+            <p class="formula">საბოლოო ზომა = Width (300px)</p>
+          </div>
+        </article>
+ 
+      </div>
+    </section>
+ 
+    <!-- ნაწილი 4: გატეხილი layout -->
+    <section class="section">
+      <h2>რატომ ტყდება განლაგება?</h2>
+      <p class="section-intro">
+        ორი სვეტი, თითოეული <span>width: 50%</span>, <span>padding: 20px</span> და <span>border: 2px solid</span>-ით.
+        კონტეინერი ორივე შემთხვევაში ერთი და იგივეა.
+      </p>
+ 
+      <div class="case">
+        <h3>ქეისი 1: content-box</h3>
+        <p>თითო სვეტი 50% + 44px გახდა. ჯამი 100%-ს აჭარბებს და მეორე სვეტი ქვემოთ ვარდება.</p>
+        <div class="columns columns--content-box">
+          <div class="column">სვეტი 1<br><small>50% + 44px</small></div>
+          <div class="column">სვეტი 2<br><small>50% + 44px</small></div>
+        </div>
+      </div>
+ 
+      <div class="case">
+        <h3>ქეისი 2: border-box</h3>
+        <p>padding და border 50%-ის შიგნითაა, ამიტომ ორივე სვეტი ერთ ხაზზე ეტევა.</p>
+        <div class="columns columns--border-box">
+          <div class="column">სვეტი 1<br><small>50%</small></div>
+          <div class="column">სვეტი 2<br><small>50%</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Golden Rule -->
+<section class="section section--summary">
+  <h2 class="section__title">შეჯამება და ოქროს წესი </h2>
+  <p class="section__description">
+    თანამედროვე ვებდეველოპმენტში layout-ის პრობლემების თავიდან ასაცილებლად CSS პროექტს ყოველთვის ვიწყებთ ამ წესით:
+  </p>
+
+  <div class="code-box">
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+  </div>
+
+  <p class="summary-text">
+    <strong>რატომ გვიმარტივებს ეს წესი ცხოვრებას?</strong><br>
+    ის აიძულებს ყველა ელემენტს იმოქმედოს პროგნოზირებადად: თუ ელემენტს მიანიჭებთ <span class="inline-span">width: 400px</span>-ს, ის ეკრანზე მართლაც 400px დარჩება, მიუხედავად იმისა, თუ რამდენ Padding-ს ან Border-ს დაუმატებთ.
+  </p>
+</section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>CSS Box Model Educational Guide • დამზადებულია HTML5 &amp; CSS3-ით</p>
+      <p>Made by - Natali Shanava</p>
+    </div>
+  </footer>
+
+</body>
+</html>
