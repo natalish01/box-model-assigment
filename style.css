@@ -309,8 +309,6 @@ main {
         border-radius: 8px;
         margin: 15px 0;
         font-family: Consolas, Monaco, 'Courier New', monospace;
-        white-space: pre-wrap;
-        /* ინარჩუნებს ჰარების (spaces) და ახალ ხაზზე გადასვლის სტრუქტურას */
         font-size: 0.95rem;
         line-height: 1.5;
     }
